@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Field Serializer -->
+        <service id="RecentlyViewedProduct\DAL\FieldSerializer\RecentProductFieldSerializer">
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
+            <argument type="service" id="validator"/>
+
+            <tag name="shopware.field_serializer"/>
+        </service>
+
+        <!-- Entity Definitions-->
+        <service id="RecentlyViewedProduct\DAL\RecentlyViewedProductDefinition">
+            <tag name="shopware.entity.definition" entity="recently_viewed_product"/>
+        </service>
+
+        <service id="RecentlyViewedProduct\Service\RecentlyViewedProductService">
+            <argument type="service" id="recently_viewed_product.repository"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="sales_channel.product.repository"/>
+        </service>
+
+        <service id="RecentlyViewedProduct\Subscriber\Storefront\ProductPageLoaderSubscriber">
+            <argument type="service" id="RecentlyViewedProduct\Service\RecentlyViewedProductService"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="RecentlyViewedProduct\Subscriber\Storefront\CmsPageLoaderSubscriber">
+            <argument type="service" id="RecentlyViewedProduct\Service\RecentlyViewedProductService"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+
+        <service id="RecentlyViewedProduct\Core\Content\Product\Cms\RecentlyViewedProductCmsElementResolver">
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="RecentlyViewedProduct\Service\RecentlyViewedProductService"/>
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
+
+        <service id="RecentlyViewedProduct\Core\System\SalesChannel\Context\SalesChannelContextPersisterDecorated"
+                 decorates="Shopware\Core\System\SalesChannel\Context\SalesChannelContextPersister"
+                 decoration-on-invalid="ignore">
+            <argument type="service" id="RecentlyViewedProduct\Core\System\SalesChannel\Context\SalesChannelContextPersisterDecorated.inner"/>
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+        </service>
+
+    </services>
+</container>

@@ -1,0 +1,30 @@
+{
+  "name": "vienthuong/recently-viewed-products",
+  "description": "Recently viewed products plugin",
+  "type": "shopware-platform-plugin",
+  "version": "1.0.0",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "RecentlyViewedProduct\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "RecentlyViewedProduct\\RecentlyViewedProduct",
+    "plugin-icon": "src/Resources/config/plugin.png",
+    "copyright": "(c) by Thuong Le<levienthuong@gmail.com>",
+    "label": {
+      "de-DE": "Kürzlich angesehene Produkte für SW6",
+      "en-GB": "Recently viewed products for SW6"
+    },
+    "description": {
+      "de-DE": "Kunden kürzlich angesehene Produkte anzeigen",
+      "en-GB": "Show customer recently viewed products"
+    }
+  },
+    "conflict": {
+        "shopware/storefront": "<6,>=7",
+        "shopware/administration": "<6,>=7"
+    },
+    "prefer-stable": true
+}

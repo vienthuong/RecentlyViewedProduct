@@ -1,0 +1,23 @@
+{
+    "sw-cms": {
+        "elements": {
+            "recentlyViewedProductSlider": {
+                "label": "Schieberegler für kürzlich gesehene Produkte",
+                "config": {
+                    "label": {
+                        "includePrice": "Produktpreis anzeigen",
+                        "includeAction": "Box-Aktionen anzeigen",
+                        "includeRating": "Bewertung anzeigen"
+                    }
+                }
+            }
+        },
+        "blocks": {
+            "commerce": {
+                "recentlyViewedProductSlider": {
+                    "label": "Schieberegler für kürzlich gesehene Produkte"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Recently Viewed Product Configuration</title>
+        <title lang="de-DE">Zuletzt angesehene Produktkonfiguration</title>
+
+        <input-field type="int">
+            <name>maximumItems</name>
+            <label>Maximum Items</label>
+            <label lang="de-DE">Maximale Artikel</label>
+            <placeholder>Enter maximum items to show...</placeholder>
+            <placeholder lang="de-DE">Geben Sie die maximal anzuzeigenden Elemente ein ...</placeholder>
+            <defaultValue>10</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>showOnProductDetail</name>
+            <label>Show on product detail page</label>
+            <label lang="de-DE">Auf Produktdetailseite anzeigen</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>autoShowOnCmsPage</name>
+            <label>Automatically show on every CMS Page</label>
+            <label lang="de-DE">Auto Auf Cms-Seite anzeigen</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>showInRandomOrder</name>
+            <label>Show the recent products in random order</label>
+            <label lang="de-DE">Zeigen Sie die neuesten Produkte in zufälliger Reihenfolge</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Default Element Configuration</title>
+        <title lang="de-DE">Standardelementkonfiguration</title>
+        <input-field type="text">
+            <name>title</name>
+            <label>Slider title</label>
+            <label lang="de-DE">Slider-Titel</label>
+            <placeholder>Enter default slider title...</placeholder>
+            <placeholder lang="de-DE">Geben Sie den Standardtitel des Schiebereglers ein ...</placeholder>
+            <defaultValue>Recently viewed products</defaultValue>
+        </input-field>
+        <input-field type="single-select">
+            <name>displayMode</name>
+            <label>Display Mode</label>
+            <options>
+                <option>
+                    <id>standard</id>
+                    <name>Standard</name>
+                    <name lang="de-DE">Standard</name>
+                </option>
+                <option>
+                    <id>cover</id>
+                    <name>Cover</name>
+                    <name lang="de-DE">Startseite</name>
+                </option>
+                <option>
+                    <id>contain</id>
+                    <name>Contain</name>
+                    <name lang="de-DE">Enthalten</name>
+                </option>
+            </options>
+            <defaultValue>cover</defaultValue>
+        </input-field>
+        <input-field type="single-select">
+            <name>verticalAlign</name>
+            <label>Vertical align</label>
+            <label lang="de-DE">Vertikal ausrichten</label>
+            <options>
+                <option>
+                    <id>top</id>
+                    <name>Top</name>
+                    <name lang="de-DE">oben</name>
+                </option>
+                <option>
+                    <id>center</id>
+                    <name>Center</name>
+                    <name lang="de-DE">Center</name>
+                </option>
+                <option>
+                    <id>bottom</id>
+                    <name>Bottom</name>
+                    <name lang="de-DE">Unterseite</name>
+                </option>
+            </options>
+            <defaultValue>center</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>navigation</name>
+            <label>Navigation</label>
+            <label lang="de-DE">Navigation</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>rotate</name>
+            <label>Automatic sliding</label>
+            <label lang="de-DE">Automatisches Schieben</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="bool">
+            <name>border</name>
+            <label>Border</label>
+            <label lang="de-DE">Rand</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+        <input-field type="text">
+            <name>elMinWidth</name>
+            <label>Minimal width (px only)</label>
+            <label lang="de-DE">Minimale Breite (px)</label>
+            <defaultValue>250px</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>includePrice</name>
+            <label>Show product price</label>
+            <label lang="de-DE">Produktpreis anzeigen</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>includeAction</name>
+            <label>Show box actions</label>
+            <label lang="de-DE">Boxaktionen anzeigen</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>includeRating</name>
+            <label>Show product ratings</label>
+            <label lang="de-DE">Produktbewertungen anzeigen</label>
+            <defaultValue>false</defaultValue>
+        </input-field>
+    </card>
+</config>
