@@ -1,0 +1,15 @@
+@import 'scss/layout/_scroll-up';
+
+.cms-element-recently-viewed-product-slider {
+    @extend .cms-element-product-slider;
+
+    .product-slider-container {
+        padding-left: 2px;
+    }
+}
+
+.box-recently-viewed {
+    .product-price-unit {
+        height: auto;
+    }
+}

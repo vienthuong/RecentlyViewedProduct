@@ -1,0 +1,12 @@
+{% block block_recently_viewed_product_slider %}
+    {% set element = block.slots.getSlot('recentlyViewedProductSlider') %}
+    {% set columns = 1 %}
+
+    {% if element.data.products.count > 0 %}
+        <div class="col-12" data-cms-element-id="{{ element.id }}">
+            {% block block_recently_viewed_product_slider_inner %}
+                {% sw_include "@Storefront/storefront/element/cms-element-" ~ element.type ~ ".html.twig" %}
+            {% endblock %}
+        </div>
+    {% endif %}
+{% endblock %}

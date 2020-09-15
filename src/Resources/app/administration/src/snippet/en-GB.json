@@ -1,0 +1,23 @@
+{
+    "sw-cms": {
+        "elements": {
+            "recentlyViewedProductSlider": {
+                "label": "Recently viewed products slider",
+                "config": {
+                    "label": {
+                        "includePrice": "Show product price",
+                        "includeAction": "Show box actions",
+                        "includeRating": "Show rating"
+                    }
+                }
+            }
+        },
+        "blocks": {
+            "commerce": {
+                "recentlyViewedProductSlider": {
+                    "label": "Recently viewed products slider"
+                }
+            }
+        }
+    }
+}

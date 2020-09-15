@@ -1,0 +1,94 @@
+{% block sw_cms_element_recently_viewed_product_slider_config %}
+    <div class="sw-cms-el-config-recently-viewed-product-slider">
+        {% block sw_cms_element_recently_seen_product_slider_config_settings_loading %}
+            <sw-loader v-if="isLoading"></sw-loader>
+        {% endblock %}
+        {% block sw_cms_element_recently_seen_product_slider_config_settings %}
+            <sw-container v-else class="sw-cms-el-config-product-slider__tab-settings">
+
+                {% block sw_cms_element_recently_seen_product_slider_config_content_title %}
+                    <sw-field type="text"
+                              :label="$tc('sw-cms.elements.productSlider.config.label.title')"
+                              :placeholder="$tc('sw-cms.elements.productSlider.config.placeholder.title')"
+                              v-model="element.config.title.value">
+                    </sw-field>
+                {% endblock %}
+
+                {% block sw_cms_element_recently_seen_product_slider_config_settings_display_mode %}
+                    <sw-select-field :label="$tc('sw-cms.elements.general.config.label.displayMode')"
+                                     v-model="element.config.displayMode.value">
+                        <option value="standard">{{ $tc('sw-cms.elements.general.config.label.displayModeStandard') }}</option>
+                        <option value="cover">{{ $tc('sw-cms.elements.general.config.label.displayModeCover') }}</option>
+                        <option value="contain">{{ $tc('sw-cms.elements.general.config.label.displayModeContain') }}</option>
+                    </sw-select-field>
+                {% endblock %}
+
+                {% block sw_cms_element_recently_seen_product_slider_config_settings_vertical_align %}
+                    <sw-select-field :label="$tc('sw-cms.elements.general.config.label.verticalAlign')"
+                                     v-model="element.config.verticalAlign.value"
+                                     :placeholder="$tc('sw-cms.elements.general.config.label.verticalAlign')">
+                        <option value="flex-start">{{ $tc('sw-cms.elements.general.config.label.verticalAlignTop') }}</option>
+                        <option value="center">{{ $tc('sw-cms.elements.general.config.label.verticalAlignCenter') }}</option>
+                        <option value="flex-end">{{ $tc('sw-cms.elements.general.config.label.verticalAlignBottom') }}</option>
+                    </sw-select-field>
+                {% endblock %}
+
+                {% block sw_cms_element_recently_seen_product_slider_config_settings_navigation %}
+                    <sw-field type="switch"
+                              bordered
+                              :label="$tc('sw-cms.elements.productSlider.config.label.navigation')"
+                              v-model="element.config.navigation.value">
+                    </sw-field>
+                {% endblock %}
+
+                {% block sw_cms_element_recently_seen_product_slider_config_settings_rotate %}
+                    <sw-field type="switch"
+                              bordered
+                              :label="$tc('sw-cms.elements.productSlider.config.label.rotate')"
+                              v-model="element.config.rotate.value">
+                    </sw-field>
+                {% endblock %}
+
+                {% block sw_cms_element_recently_seen_product_slider_config_settings_border %}
+                    <sw-field type="switch"
+                              bordered
+                              :label="$tc('sw-cms.elements.productSlider.config.label.border')"
+                              v-model="element.config.border.value">
+                    </sw-field>
+                {% endblock %}
+
+                {% block sw_cms_element_recently_seen_product_slider_config_settings_min_width %}
+                    <sw-field type="text"
+                              :label="$tc('sw-cms.elements.productSlider.config.label.minWidth')"
+                              :placeholder="$tc('sw-cms.elements.productSlider.config.placeholder.minWidth')"
+                              v-model="element.config.elMinWidth.value">
+                    </sw-field>
+                {% endblock %}
+
+                {% block sw_cms_element_recently_seen_product_slider_config_settings_include_price %}
+                    <sw-field type="switch"
+                              bordered
+                              :label="$tc('sw-cms.elements.recentlyViewedProductSlider.config.label.includePrice')"
+                              v-model="element.config.includePrice.value">
+                    </sw-field>
+                {% endblock %}
+
+                {% block sw_cms_element_recently_seen_product_slider_config_settings_include_action %}
+                    <sw-field type="switch"
+                              bordered
+                              :label="$tc('sw-cms.elements.recentlyViewedProductSlider.config.label.includeAction')"
+                              v-model="element.config.includeAction.value">
+                    </sw-field>
+                {% endblock %}
+
+                {% block sw_cms_element_recently_seen_product_slider_config_settings_include_rating %}
+                <sw-field type="switch"
+                          bordered
+                          :label="$tc('sw-cms.elements.recentlyViewedProductSlider.config.label.includeRating')"
+                          v-model="element.config.includeAction.value">
+                </sw-field>
+                {% endblock %}
+            </sw-container>
+        {% endblock %}
+    </div>
+{% endblock %}

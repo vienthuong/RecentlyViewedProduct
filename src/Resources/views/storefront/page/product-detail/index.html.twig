@@ -1,0 +1,17 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/index.html.twig' %}
+
+{% block page_product_detail_inner %}
+    {{ parent() }}
+
+    {% block page_product_detail_recently_viewed_product %}
+        {% if page.extensions.recentlyViewedProductElement and page.extensions.recentlyViewedProductElement.data.products.count > 0 %}
+            {% set element = page.extensions.recentlyViewedProductElement %}
+            <hr>
+            <div class="product-detail-recently-viewed-product" data-cms-element-id="{{ element.id }}">
+                {% block block_recently_viewed_product_slider_inner %}
+                    {% sw_include "@Storefront/storefront/element/cms-element-recently-viewed-product-slider.html.twig" %}
+                {% endblock %}
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}
