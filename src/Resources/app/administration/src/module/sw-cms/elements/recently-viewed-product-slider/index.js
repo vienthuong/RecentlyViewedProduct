@@ -12,6 +12,7 @@ Shopware.Service('cmsService').registerCmsElement({
     component: 'sw-cms-el-recently-viewed-product-slider',
     configComponent: 'sw-cms-el-config-recently-viewed-product-slider',
     previewComponent: 'sw-cms-el-preview-recently-viewed-product-slider',
+    removable: false,
     defaultConfig: {
         title: {
             source: 'static',

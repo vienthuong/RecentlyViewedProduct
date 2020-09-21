@@ -31,7 +31,7 @@ http://shopware.thuong.lv/
 
 | Version 	| Requirements               	|
 |---------	|----------------------------	|
-| 1.0.0    	| Shopware 6.3 >=	            |
+| 1.0.1    	| Shopware 6.3 >=	            |
 
 ## License
     

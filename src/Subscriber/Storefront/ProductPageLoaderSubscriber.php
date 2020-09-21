@@ -35,8 +35,12 @@ class ProductPageLoaderSubscriber implements EventSubscriberInterface
             $context = $event->getSalesChannelContext();
             $productId = $page->getProduct()->getId();
 
+            $slot = $this->recentlyViewedProductService->buildPseudoElement($context);
+            $productSliderStruct = $this->recentlyViewedProductService->buildRecentProductSliderStruct($context, [$productId]);
+            $slot->setData($productSliderStruct);
+
             $page->setExtensions([
-                'recentlyViewedProductElement' => $this->recentlyViewedProductService->buildPseudoElement($context, [$productId]),
+                'recentlyViewedProductElement' => $slot,
             ]);
 
             $this->recentlyViewedProductService->addRecentProduct($productId, $context);

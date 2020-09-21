@@ -104,7 +104,10 @@ class CmsPageLoaderSubscriber implements EventSubscriberInterface
             $pseudoSliderBlock->setId(Uuid::randomHex());
 
             $pseudoSlot = $this->recentlyViewedProductService->buildPseudoElement($context);
+            $productSliderStruct = $this->recentlyViewedProductService->buildRecentProductSliderStruct($context);
             $pseudoSlot->setBlockId($pseudoSliderBlock->getId());
+            $pseudoSlot->setData($productSliderStruct);
+
             $pseudoSliderBlock->setPosition(1);
             $pseudoSliderBlock->setSlots(new CmsSlotCollection([$pseudoSlot]));
 
@@ -112,7 +115,6 @@ class CmsPageLoaderSubscriber implements EventSubscriberInterface
             $pseudoSection->setType('default');
             $cmsPageSections->add($pseudoSection);
         } catch (\Throwable $exception) {
-            dd($exception);
             // nth
         }
     }

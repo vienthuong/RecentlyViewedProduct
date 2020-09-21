@@ -5,12 +5,12 @@
 
     {% block page_product_detail_recently_viewed_product %}
         {% if page.extensions.recentlyViewedProductElement and page.extensions.recentlyViewedProductElement.data.products.count > 0 %}
-            {% set element = page.extensions.recentlyViewedProductElement %}
-            <hr>
-            <div class="product-detail-recently-viewed-product" data-cms-element-id="{{ element.id }}">
-                {% block block_recently_viewed_product_slider_inner %}
-                    {% sw_include "@Storefront/storefront/element/cms-element-recently-viewed-product-slider.html.twig" %}
-                {% endblock %}
+            {% set element = {
+                id: page.extensions.recentlyViewedProductElement.id,
+                excludeProductId: page.product.id
+            } %}
+            <hr class="recently-viewed-product-bar">
+            <div class="product-detail-recently-viewed-product" data-cms-element-id="{{ element.id }}" data-recent-product-slider="true" data-recent-product-slider-options="{{ element|json_encode }}">
             </div>
         {% endif %}
     {% endblock %}

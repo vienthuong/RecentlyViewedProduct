@@ -11,6 +11,7 @@ use Shopware\Core\Content\Cms\SalesChannel\Struct\ProductSliderStruct;
 use Shopware\Core\Content\Product\ProductCollection;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\EntitySearchResult;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\MultiFilter;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\RangeFilter;
@@ -56,7 +57,7 @@ class RecentlyViewedProductService
         $this->salesChannelProductRepository = $salesChannelProductRepository;
     }
 
-    public function loadRecentProductCollection(SalesChannelContext $context): RecentProductCollection
+    public function loadRecentProductCollection(SalesChannelContext $context, bool $forceInOrder = false): RecentProductCollection
     {
         // Caching
         if ($this->recentProducts) {
@@ -71,8 +72,8 @@ class RecentlyViewedProductService
 
         $showInRandomOrder = $this->systemConfigService->get(RecentlyViewedProduct::PLUGIN_NAME . '.config.showInRandomOrder', $context->getSalesChannel()->getId()) ?? false;
 
-        if ($showInRandomOrder) {
-            $this->recentProducts = $this->recentProducts->shuffle();
+        if (!$forceInOrder && $showInRandomOrder) {
+            return $this->recentProducts->shuffle();
         }
 
         return $this->recentProducts;
@@ -80,7 +81,7 @@ class RecentlyViewedProductService
 
     public function addRecentProduct(string $productId, SalesChannelContext $context): RecentProductCollection
     {
-        $contextRecentProducts = $this->loadRecentProductCollection($context);
+        $contextRecentProducts = $this->loadRecentProductCollection($context, true);
 
         if ($contextRecentProducts->first() === $productId) {
             return $contextRecentProducts;
@@ -141,12 +142,13 @@ class RecentlyViewedProductService
 
         $criteria->addFilter($multiFilter);
 
-        /** @var ProductCollection|null $productEntities */
-        $productEntities = $this->salesChannelProductRepository->search($criteria, $context)->getEntities();
+        $searchResult = $this->salesChannelProductRepository->search($criteria, $context);
 
-        $this->productEntities = $productEntities;
+        $this->productEntities = $searchResult->getEntities();
 
-        return $productEntities;
+        $this->cleanNotAvailableRecentProducts($searchResult);
+
+        return $this->productEntities;
     }
 
     public function setProductEntities(?ProductCollection $productEntities): void
@@ -154,7 +156,7 @@ class RecentlyViewedProductService
         $this->productEntities = $productEntities;
     }
 
-    public function buildPseudoElement(SalesChannelContext $context, ?array $excludeProductIds = []): CmsSlotEntity
+    public function buildPseudoElement(SalesChannelContext $context): CmsSlotEntity
     {
         /** @var array $pluginConfig */
         $pluginConfig = $this->systemConfigService->get(RecentlyViewedProduct::PLUGIN_NAME . '.config', $context->getSalesChannel()->getId());
@@ -179,6 +181,15 @@ class RecentlyViewedProductService
             ];
         }, $pluginConfig));
 
+        $pseudoSlot->setFieldConfig($fieldCollection);
+        $pseudoSlot->setId(Uuid::randomHex());
+        $pseudoSlot->setUniqueIdentifier(Uuid::randomHex());
+
+        return $pseudoSlot;
+    }
+
+    public function buildRecentProductSliderStruct(SalesChannelContext $context, ?array $excludeProductIds = []): ProductSliderStruct
+    {
         $products = $this->getRecentProductEntities($context) ?? new ProductCollection([]);
 
         if (!empty($excludeProductIds)) {
@@ -187,13 +198,29 @@ class RecentlyViewedProductService
             }
         }
 
-        $pseudoSlot->setFieldConfig($fieldCollection);
         $productSliderStruct = new ProductSliderStruct();
         $productSliderStruct->setProducts($products);
-        $pseudoSlot->setData($productSliderStruct);
-        $pseudoSlot->setId(Uuid::randomHex());
-        $pseudoSlot->setUniqueIdentifier(Uuid::randomHex());
 
-        return $pseudoSlot;
+        return $productSliderStruct;
+    }
+
+    private function cleanNotAvailableRecentProducts(EntitySearchResult $searchResult): void
+    {
+        $entities = $searchResult->getEntities();
+
+        $recentProductIds = $searchResult->getCriteria()->getIds();
+
+        if (!empty($recentProductIds) && count($recentProductIds) !== $entities->count()) {
+            $recentProductIds = $searchResult->getCriteria()->getIds();
+            $availableIds = [];
+
+            foreach ($recentProductIds as $productId) {
+                if ($entities->has($productId)) {
+                    $availableIds[] = $productId;
+                }
+            }
+
+            $this->saveRecentProductCollection(new RecentProductCollection($availableIds), $context);
+        }
     }
 }
