@@ -4,6 +4,7 @@ namespace RecentlyViewedProduct\Core\System\SalesChannel\Context;
 
 use Doctrine\DBAL\Connection;
 use Shopware\Core\System\SalesChannel\Context\SalesChannelContextPersister;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class SalesChannelContextPersisterDecorated extends SalesChannelContextPersister
 {
@@ -19,12 +20,13 @@ class SalesChannelContextPersisterDecorated extends SalesChannelContextPersister
 
     public function __construct(
         SalesChannelContextPersister $decorated,
-        Connection $connection
+        Connection $connection,
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->decorated = $decorated;
         $this->connection = $connection;
 
-        parent::__construct($connection);
+        parent::__construct($connection, $eventDispatcher);
     }
 
     public function replace(string $oldToken/*, ?SalesChannelContext $context = null*/): string

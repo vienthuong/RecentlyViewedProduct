@@ -53,6 +53,7 @@
                  decoration-on-invalid="ignore">
             <argument type="service" id="RecentlyViewedProduct\Core\System\SalesChannel\Context\SalesChannelContextPersisterDecorated.inner"/>
             <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="event_dispatcher"/>
         </service>
 
     </services>
