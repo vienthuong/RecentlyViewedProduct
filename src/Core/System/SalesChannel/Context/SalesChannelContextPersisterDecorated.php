@@ -4,6 +4,7 @@ namespace RecentlyViewedProduct\Core\System\SalesChannel\Context;
 
 use Doctrine\DBAL\Connection;
 use Shopware\Core\System\SalesChannel\Context\SalesChannelContextPersister;
+use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class SalesChannelContextPersisterDecorated extends SalesChannelContextPersister
@@ -29,9 +30,9 @@ class SalesChannelContextPersisterDecorated extends SalesChannelContextPersister
         parent::__construct($connection, $eventDispatcher);
     }
 
-    public function replace(string $oldToken/*, ?SalesChannelContext $context = null*/): string
+    public function replace(string $oldToken, SalesChannelContext $context): string
     {
-        $newToken = $this->decorated->replace($oldToken);
+        $newToken = $this->decorated->replace($oldToken, $context);
 
         $this->connection->executeUpdate(
             'UPDATE `recently_viewed_product`
