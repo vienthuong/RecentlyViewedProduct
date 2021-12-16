@@ -16,8 +16,10 @@ class Migration1600098518CreateRecentlyViewedProductTable extends MigrationStep
     {
         $connection->executeUpdate('
             CREATE TABLE IF NOT EXISTS `recently_viewed_product` (
-              `token` VARCHAR(50) COLLATE utf8mb4_unicode_ci NOT NULL UNIQUE,
-              `recent_product` JSON NULL
+                `id` BINARY(16) NOT NULL,
+                `token` VARCHAR(50) COLLATE utf8mb4_unicode_ci NOT NULL UNIQUE,
+                `recent_product` JSON NULL,
+                PRIMARY KEY (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
         ');
     }

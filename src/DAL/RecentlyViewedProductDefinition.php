@@ -3,7 +3,9 @@
 namespace RecentlyViewedProduct\DAL;
 
 use RecentlyViewedProduct\DAL\Field\RecentProductField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\PrimaryKey;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\IdField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\StringField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 use Shopware\Core\Framework\DataAbstractionLayer\MappingEntityDefinition;
@@ -35,6 +37,7 @@ class RecentlyViewedProductDefinition extends MappingEntityDefinition
     protected function defineFields(): FieldCollection
     {
         return new FieldCollection([
+            (new IdField('id', 'id'))->addFlags(new PrimaryKey(), new Required()),
             (new StringField('token', 'token'))->setFlags(new Required()),
             new RecentProductField('recent_product', 'recentProduct', [], []),
         ]);

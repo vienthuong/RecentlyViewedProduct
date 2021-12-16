@@ -4,9 +4,12 @@ namespace RecentlyViewedProduct\DAL;
 
 use RecentlyViewedProduct\Struct\RecentProductCollection;
 use Shopware\Core\Framework\DataAbstractionLayer\Entity;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
 
 class RecentlyViewedProductEntity extends Entity
 {
+    use EntityIdTrait;
+
     /**
      * @var string
      */
