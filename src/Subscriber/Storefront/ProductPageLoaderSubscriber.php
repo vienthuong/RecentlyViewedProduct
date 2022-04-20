@@ -3,6 +3,7 @@
 namespace RecentlyViewedProduct\Subscriber\Storefront;
 
 use RecentlyViewedProduct\Service\RecentlyViewedProductService;
+use Shopware\Core\Content\Product\ProductEntity;
 use Shopware\Storefront\Page\Product\ProductPageLoadedEvent;
 use Shopware\Storefront\Page\Product\QuickView\MinimalQuickViewPageLoadedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -33,7 +34,7 @@ class ProductPageLoaderSubscriber implements EventSubscriberInterface
         try {
             $page = $event->getPage();
             $context = $event->getSalesChannelContext();
-            $productId = $page->getProduct()->getId();
+            $productId = $this->getMainProductId($page->getProduct());
 
             $slot = $this->recentlyViewedProductService->buildPseudoElement($context);
             $productSliderStruct = $this->recentlyViewedProductService->buildRecentProductSliderStruct($context, [$productId]);
@@ -50,11 +51,15 @@ class ProductPageLoaderSubscriber implements EventSubscriberInterface
     public function addRecentlyViewedProductFromQuickView(MinimalQuickViewPageLoadedEvent $event): void
     {
         try {
-            $page = $event->getPage();
+            $productId = $this->getMainProductId($event->getPage()->getProduct());
 
-            $this->recentlyViewedProductService->addRecentProduct($page->getProduct()->getId(), $event->getSalesChannelContext());
+            $this->recentlyViewedProductService->addRecentProduct($productId, $event->getSalesChannelContext());
         } catch (\Throwable $exception) {
             // nth
         }
+    }
+
+    private function getMainProductId(ProductEntity $product): string {
+        return $product->getParentId() ?? $product->getId();
     }
 }
