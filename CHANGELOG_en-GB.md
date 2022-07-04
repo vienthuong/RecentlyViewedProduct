@@ -1,3 +1,6 @@
+# 1.2.0 - SW 6.4.11.0 Compatible
+- New version work on 6.4.11.0 onward, if you're using 6.4.10.0 backward, please use the 1.1.0 version
+
 # 1.0.2 - SW 6.3.2 Compatible
 
 # 1.0.1 - Fix HTTP Caching

@@ -4,8 +4,6 @@
 
 ## Demo:
 
-http://shopware.thuong.lv/
-
 ![](https://media.giphy.com/media/VInadwfREBVz8QfIAI/giphy.gif)
 
 ![](https://user-images.githubusercontent.com/22548423/93246997-d00fe580-f7b7-11ea-925b-18ee10dca0ee.png)
@@ -29,9 +27,10 @@ http://shopware.thuong.lv/
 
 ## Requirements
 
-| Version 	| Requirements               	|
-|---------	|----------------------------	|
-| 1.0.1    	| Shopware 6.3 >=	            |
+| Version 	   | Requirements               	 |
+|-------------|------------------------------|
+| 1.0.1    	  | Shopware 6.3 >= 6.4.10.0	    |
+| 1.2.0    	 | Shopware 6.4.11.0	           |
 
 ## License
     
