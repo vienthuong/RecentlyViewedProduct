@@ -146,7 +146,7 @@ class RecentlyViewedProductService
 
         $this->productEntities = $searchResult->getEntities();
 
-        $this->cleanNotAvailableRecentProducts($searchResult);
+        $this->cleanNotAvailableRecentProducts($searchResult, $context);
 
         return $this->productEntities;
     }
@@ -204,7 +204,7 @@ class RecentlyViewedProductService
         return $productSliderStruct;
     }
 
-    private function cleanNotAvailableRecentProducts(EntitySearchResult $searchResult): void
+    private function cleanNotAvailableRecentProducts(EntitySearchResult $searchResult, SalesChannelContext $context): void
     {
         $entities = $searchResult->getEntities();
 
