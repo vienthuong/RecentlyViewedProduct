@@ -35,7 +35,7 @@ class RecentProductFieldSerializer extends JsonFieldSerializer
     /**
      * {@inheritdoc}
      */
-    public function decode(Field $field, $value)
+    public function decode(Field $field, $value): RecentProductCollection | null
     {
         if ($value === null) {
             return null;

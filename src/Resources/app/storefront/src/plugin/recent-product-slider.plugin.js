@@ -25,7 +25,7 @@ export default class RecentProductSliderPlugin extends Plugin {
             ElementLoadingIndicatorUtil.remove(this.el);
 
             if (!response || response.trim().length === 0) {
-                const hrBar = this.el.closest('.product-detail').querySelector('.recently-viewed-product-bar');
+                const hrBar = this.el.closest('.product-detail')?.querySelector('.recently-viewed-product-bar');
 
                 if (hrBar) {
                     hrBar.remove();

@@ -1,7 +1,8 @@
-{% sw_extends '@Storefront/storefront/base.html.twig' %}
+{% sw_extends '@Storefront/storefront/layout/meta.html.twig' %}
 
-{% block base_script_router %}
+{% block layout_head_javascript_router %}
     {{ parent() }}
+
     <script>
         window.router['frontend.recent-product-slider.content'] = '{{ path('frontend.recent-product-slider.content') }}';
     </script>

@@ -9,7 +9,7 @@ use Shopware\Core\Content\Cms\DataResolver\FieldConfig;
 use Shopware\Core\Content\Cms\DataResolver\FieldConfigCollection;
 use Shopware\Core\Content\Cms\SalesChannel\Struct\ProductSliderStruct;
 use Shopware\Core\Content\Product\ProductCollection;
-use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\EntitySearchResult;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
@@ -23,7 +23,7 @@ use Shopware\Core\System\SystemConfig\SystemConfigService;
 class RecentlyViewedProductService
 {
     /**
-     * @var EntityRepositoryInterface
+     * @var EntityRepository
      */
     private $rpvRepository;
 
@@ -48,7 +48,7 @@ class RecentlyViewedProductService
     private $salesChannelProductRepository;
 
     public function __construct(
-        EntityRepositoryInterface $rpvRepository,
+        EntityRepository $rpvRepository,
         SystemConfigService $systemConfigService,
         SalesChannelRepositoryInterface $salesChannelProductRepository
     ) {
