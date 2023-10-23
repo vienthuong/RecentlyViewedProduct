@@ -2,7 +2,7 @@
   "name": "vienthuong/recently-viewed-products",
   "description": "Recently viewed products plugin",
   "type": "shopware-platform-plugin",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "license": "MIT",
   "authors": [
     {
@@ -16,8 +16,8 @@
     }
   },
   "require": {
-    "shopware/core": "^6.4.10.1",
-    "shopware/storefront": "^6.4.10.1"
+    "shopware/core": "^6.5.0.0",
+    "shopware/storefront": "^6.5.0.0"
   },
   "extra": {
     "shopware-plugin-class": "RecentlyViewedProduct\\RecentlyViewedProduct",
