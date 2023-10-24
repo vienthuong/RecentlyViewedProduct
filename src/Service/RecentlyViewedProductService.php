@@ -16,7 +16,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\MultiFilter;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\RangeFilter;
 use Shopware\Core\Framework\Uuid\Uuid;
-use Shopware\Core\System\SalesChannel\Entity\SalesChannelRepositoryInterface;
+use Shopware\Core\System\SalesChannel\Entity\SalesChannelRepository;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 
@@ -43,14 +43,14 @@ class RecentlyViewedProductService
     private $productEntities;
 
     /**
-     * @var SalesChannelRepositoryInterface
+     * @var SalesChannelRepository
      */
     private $salesChannelProductRepository;
 
     public function __construct(
         EntityRepository $rpvRepository,
         SystemConfigService $systemConfigService,
-        SalesChannelRepositoryInterface $salesChannelProductRepository
+        SalesChannelRepository $salesChannelProductRepository
     ) {
         $this->rpvRepository = $rpvRepository;
         $this->systemConfigService = $systemConfigService;
