@@ -7,8 +7,8 @@
     <services>
         <!-- Field Serializer -->
         <service id="RecentlyViewedProduct\DAL\FieldSerializer\RecentProductFieldSerializer">
-            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
             <argument type="service" id="validator"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
 
             <tag name="shopware.field_serializer"/>
         </service>
