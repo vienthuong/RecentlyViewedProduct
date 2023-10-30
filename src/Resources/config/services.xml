@@ -30,7 +30,7 @@
             <tag name="shopware.entity.definition" entity="recently_viewed_product"/>
         </service>
 
-        <service id="RecentlyViewedProduct\Service\RecentlyViewedProductService">
+        <service id="RecentlyViewedProduct\Service\RecentlyViewedProductService" public="true">
             <argument type="service" id="recently_viewed_product.repository"/>
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
             <argument type="service" id="sales_channel.product.repository"/>
