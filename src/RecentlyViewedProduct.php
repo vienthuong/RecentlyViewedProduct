@@ -4,7 +4,7 @@ namespace RecentlyViewedProduct;
 
 use Doctrine\DBAL\Connection;
 use Shopware\Core\Framework\Context;
-use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\Framework\Plugin;
@@ -24,7 +24,7 @@ class RecentlyViewedProduct extends Plugin
             return;
         }
 
-        /** @var EntityRepositoryInterface $cmsBlockRepo */
+        /** @var EntityRepository $cmsBlockRepo */
         $cmsBlockRepo = $this->container->get('cms_block.repository');
 
         $context = Context::createDefaultContext();

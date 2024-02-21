@@ -7,8 +7,8 @@
     <services>
         <!-- Field Serializer -->
         <service id="RecentlyViewedProduct\DAL\FieldSerializer\RecentProductFieldSerializer">
-            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
             <argument type="service" id="validator"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\DefinitionInstanceRegistry"/>
 
             <tag name="shopware.field_serializer"/>
         </service>
@@ -20,6 +20,9 @@
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
+            <call method="setTwig">
+                <argument type="service" id="twig"/>
+            </call>
         </service>
 
         <!-- Entity Definitions-->
@@ -27,7 +30,7 @@
             <tag name="shopware.entity.definition" entity="recently_viewed_product"/>
         </service>
 
-        <service id="RecentlyViewedProduct\Service\RecentlyViewedProductService">
+        <service id="RecentlyViewedProduct\Service\RecentlyViewedProductService" public="true">
             <argument type="service" id="recently_viewed_product.repository"/>
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
             <argument type="service" id="sales_channel.product.repository"/>
