@@ -10,6 +10,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\FieldSerializer\JsonFieldSerial
 use Shopware\Core\Framework\DataAbstractionLayer\Write\DataStack\KeyValuePair;
 use Shopware\Core\Framework\DataAbstractionLayer\Write\EntityExistence;
 use Shopware\Core\Framework\DataAbstractionLayer\Write\WriteParameterBag;
+use Shopware\Core\Framework\Util\Json;
 use Symfony\Component\Validator\Constraints\Type;
 
 class RecentProductFieldSerializer extends JsonFieldSerializer
@@ -24,12 +25,7 @@ class RecentProductFieldSerializer extends JsonFieldSerializer
             throw new InvalidSerializerFieldException(RecentProductField::class, $field);
         }
 
-        /** @var RecentProductCollection $value */
-        $value = $data->getValue();
-
-        $data->setValue($value);
-
-        yield $field->getStorageName() => parent::encodeJson($value);
+        yield $field->getStorageName() => Json::encode($data->getValue());
     }
 
     /**
