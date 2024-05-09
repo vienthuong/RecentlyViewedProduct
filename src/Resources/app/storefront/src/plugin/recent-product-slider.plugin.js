@@ -1,9 +1,7 @@
-import Plugin from 'src/plugin-system/plugin.class';
-import PluginManager from 'src/plugin-system/plugin.manager';
 import HttpClient from 'src/service/http-client.service';
 import ElementLoadingIndicatorUtil from 'src/utility/loading-indicator/element-loading-indicator.util';
 
-export default class RecentProductSliderPlugin extends Plugin {
+export default class RecentProductSliderPlugin extends window.PluginBaseClass {
     init() {
         this._client = new HttpClient();
         this.fetch();
@@ -41,6 +39,6 @@ export default class RecentProductSliderPlugin extends Plugin {
 
     renderProductSlider(html) {
         this.el.innerHTML = html;
-        PluginManager.initializePlugin('ProductSlider', '.product-slider');
+        window.PluginManager.initializePlugin('ProductSlider', '.product-slider');
     }
 }

@@ -13,31 +13,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route(defaults={"_routeScope"={"storefront"}})
- */
+#[Route(defaults: ['_routeScope' => ['storefront']])]
 class RecentProductController extends StorefrontController
 {
-    /**
-     * @var EntityRepository
-     */
-    private EntityRepository $cmsSlotRepo;
-    /**
-     * @var RecentlyViewedProductService
-     */
-    private RecentlyViewedProductService $recentlyViewedProductService;
-
     public function __construct(
-        EntityRepository $cmsSlotRepo,
-        RecentlyViewedProductService $recentlyViewedProductService
-    ) {
-        $this->cmsSlotRepo = $cmsSlotRepo;
-        $this->recentlyViewedProductService = $recentlyViewedProductService;
+        private readonly EntityRepository             $cmsSlotRepo,
+        private readonly RecentlyViewedProductService $recentlyViewedProductService
+    )
+    {
     }
 
-    /**
-     * @Route("/recent-product-slider/content", name="frontend.recent-product-slider.content", options={"seo"="false"}, methods={"GET"}, defaults={"XmlHttpRequest"=true}))
-     */
+    #[Route(path: '/recent-product-slider/content', name: 'frontend.recent-product-slider.content', methods: ['GET'], options: ['seo' => 'false'], defaults: ['XmlHttpRequest' => 'true'])]
     public function recentProductSliderContent(Request $request, SalesChannelContext $context): Response
     {
         $elementId = $request->get('elementId');
